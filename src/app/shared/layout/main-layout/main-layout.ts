@@ -5,8 +5,8 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-main-layout',
   standalone: true,
   imports: [RouterOutlet],
+
   templateUrl: './main-layout.html',
-  styleUrls: ['./main-layout.css']
+  styleUrl: './main-layout.css',
 })
 export class MainLayoutComponent {}
-
