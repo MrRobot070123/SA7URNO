@@ -1,1 +1,29 @@
-<p>main-layout works!</p>
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>SA7URNO</h2>
+    </div>
+
+    <ul class="menu">
+      <li><a routerLink="" routerLinkActive="active">🏠 Home</a></li>
+      <li><a routerLink="/cotizaciones" routerLinkActive="active">📄 Cotizaciones</a></li>
+      <li><a routerLink="/clientes" routerLinkActive="active">👥 Clientes</a></li>
+      <li><a routerLink="/servicios" routerLinkActive="active">🛠 Servicios</a></li>
+      <li><a routerLink="/ejecutivos" routerLinkActive="active">💼 Ejecutivos</a></li>
+    </ul>
+  </aside>
+
+  <!-- Contenido -->
+  <div class="main">
+    <header class="header">
+      <h3>CRM SA7URNO</h3>
+    </header>
+
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+
+</div>
