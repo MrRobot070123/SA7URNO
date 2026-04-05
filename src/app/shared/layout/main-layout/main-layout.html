@@ -1,23 +1,35 @@
 <div class="layout">
 
   <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">
+  <aside class="sidebar" [ngClass]="{ closed: !isSidebarOpen }">
+
+    <!-- Header sidebar (mobile) -->
+    <div class="sidebar-header">
       <h2>SA7URNO</h2>
+      <button class="close-btn" (click)="closeSidebar()">✕</button>
     </div>
 
     <ul class="menu">
-      <li><a routerLink="" routerLinkActive="active">🏠 Home</a></li>
-      <li><a routerLink="/cotizaciones" routerLinkActive="active">📄 Cotizaciones</a></li>
-      <li><a routerLink="/clientes" routerLinkActive="active">👥 Clientes</a></li>
-      <li><a routerLink="/servicios" routerLinkActive="active">🛠 Servicios</a></li>
-      <li><a routerLink="/ejecutivos" routerLinkActive="active">💼 Ejecutivos</a></li>
+      <li><a routerLink="" routerLinkActive="active" (click)="closeSidebar()">🏠 Home</a></li>
+      <li><a routerLink="/cotizaciones" routerLinkActive="active" (click)="closeSidebar()">📄 Cotizaciones</a></li>
+      <li><a routerLink="/clientes" routerLinkActive="active" (click)="closeSidebar()">👥 Clientes</a></li>
+      <li><a routerLink="/servicios" routerLinkActive="active" (click)="closeSidebar()">🛠 Servicios</a></li>
+      <li><a routerLink="/ejecutivos" routerLinkActive="active" (click)="closeSidebar()">💼 Ejecutivos</a></li>
     </ul>
+
   </aside>
+
+  <!-- Overlay mobile -->
+  <div
+    class="overlay"
+    *ngIf="isSidebarOpen"
+    (click)="closeSidebar()">
+  </div>
 
   <!-- Contenido -->
   <div class="main">
     <header class="header">
+      <button class="menu-btn" (click)="toggleSidebar()">☰</button>
       <h3>CRM SA7URNO</h3>
     </header>
 

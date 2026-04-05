@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './main-layout.css',
 })
 export class MainLayoutComponent {
-  isSidebarOpen = false;
+  isSidebarOpen = true;
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
@@ -20,3 +20,4 @@ export class MainLayoutComponent {
     this.isSidebarOpen = false;
   }
 }
+
