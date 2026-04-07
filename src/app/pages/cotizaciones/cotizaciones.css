@@ -1,0 +1,143 @@
+/* CONTENEDOR DE LA PAGINA */
+.cotizacion-page {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* CONTENEDOR DE LA COTIZACION */
+.cotizacion-container {
+  background: white;
+  width: 100%;
+  max-width: 1200px; /* 👈 evita diseño tipo A4 infinito */
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.cot-info {
+  text-align: right;
+  font-size: 14px;
+}
+
+.cot-info h3 {
+  margin-bottom: 6px;
+}
+
+/* SECCIONES */
+.section {
+  margin-bottom: 28px;
+}
+
+.section h4 {
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #0f172a;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  height: 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+textarea {
+  height: auto;
+}
+
+/* TABLA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+th {
+  background: #f1f5f9;
+  font-weight: 600;
+  padding: 10px;
+}
+
+td {
+  padding: 8px;
+}
+
+td input {
+  height: 36px;
+  padding: 6px;
+}
+
+/* BOTÓN */
+.btn-add {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* TOTALES */
+.totales {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+  margin-top: 28px;
+  font-size: 15px;
+}
+
+.totales h3 {
+  margin-top: 8px;
+}
+
+/* FUNCION RESPONSIVE*/
+@media (max-width: 768px) {
+
+  .header {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .cot-info {
+    text-align: left;
+  }
+
+  .totales {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+}
