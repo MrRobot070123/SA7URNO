@@ -1,46 +1,111 @@
-<div class="cotizacion-page">
-  <div class="cotizacion-container">
+<div class="wizard-page">
+  <div class="wizard-card">
 
-    <!-- HEADER -->
-    <div class="header">
-      <div>
-        <h2>HOTEL BARRANQUILLA PLAZA</h2>
-        <p>NIT: 900842287-4</p>
-      </div>
-
-      <div class="cot-info">
-        <h3>COTIZACIÓN</h3>
-        <p><strong>#:</strong> G26-001</p>
-        <p><strong>Fecha:</strong> 14/01/2025</p>
-        <p><strong>Válido hasta:</strong> 29/01/2025</p>
-      </div>
+    <!-- STEPS -->
+    <div class="wizard-steps">
+      <div class="step" [class.active]="step === 1">1. Datos</div>
+      <div class="step" [class.active]="step === 2">2. Cliente</div>
+      <div class="step" [class.active]="step === 3">3. Servicios</div>
+      <div class="step" [class.active]="step === 4">4. Resumen</div>
     </div>
 
-    <!-- EJECUTIVO -->
-    <div class="section">
-      <h4>Ejecutivo</h4>
-      <div class="grid">
-        <input placeholder="Nombre ejecutivo">
-        <input placeholder="Email">
-        <input placeholder="Teléfono">
-      </div>
-    </div>
+    <!-- STEP 1 -->
+    <section *ngIf="step === 1">
+      <h3>Datos de la cotización</h3>
 
-    <!-- CLIENTE -->
-    <div class="section">
-      <h4>Cliente</h4>
-      <div class="grid">
-        <input placeholder="Nombre cliente">
-        <input placeholder="Email">
-        <input placeholder="Dirección">
-        <input placeholder="Ciudad">
-        <input placeholder="Teléfono">
-      </div>
-    </div>
+      <!-- GRID GENERAL -->
+      <div class="form-grid">
+        <!-- Compañía -->
+        <div class="field readonly">
+          <label>Compañía</label>
+          <input type="text" [value]="companyName" readonly />
+        </div>
 
-    <!-- ITEMS -->
-    <div class="section">
-      <h4>Detalle de servicios</h4>
+        <!-- NIT -->
+        <div class="field readonly">
+          <label>NIT</label>
+          <input type="text" [value]="nit" readonly />
+        </div>
+      </div>
+
+      <!-- GRID SOLO PARA FECHAS -->
+      <div class="form-grid dates-grid">
+        <!-- Fecha elaboración -->
+        <div class="field readonly">
+          <label>Fecha de elaboración</label>
+          <input type="date" [value]="fechaElaboracion" readonly />
+        </div>
+
+        <!-- Válido hasta -->
+        <div class="field readonly">
+          <label>Válido hasta</label>
+          <input type="date" [value]="validoHasta" readonly />
+        </div>
+
+        <!-- Fecha evento -->
+        <div class="field">
+          <label>Fecha del evento</label>
+          <input type="date" [(ngModel)]="fechaEvento" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section *ngIf="step === 2">
+      <h3>Datos de la cotización</h3>
+
+      <div class="split-sections">
+
+        <!-- ========= EJECUTIVO ========= -->
+        <div class="boxed-section">
+          <div class="boxed-title">Ejecutivo</div>
+
+          <div class="form-grid single">
+            <div class="field readonly">
+              <label>Código</label>
+              <input type="text" [value]="ejecutivo.codigo" readonly>
+            </div>
+
+            <div class="field readonly">
+              <label>Nombre</label>
+              <input type="text" [value]="ejecutivo.nombre" readonly>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= CLIENTE ========= -->
+        <div class="boxed-section">
+          <div class="boxed-title">Cliente</div>
+
+          <div class="form-grid single">
+            <div class="field">
+              <label>Nombre</label>
+              <input type="text" [(ngModel)]="busquedaCliente" (input)="filtrarClientes()"
+                placeholder="Escribe el nombre del cliente">
+            </div>
+            <div class="field readonly">
+              <!-- Lista desplegable -->
+              <ul class="clients-dropdown" *ngIf="clientesFiltrados.length && busquedaCliente">
+                <li *ngFor="let cliente of clientesFiltrados" (click)="seleccionarCliente(cliente)">
+                  {{ cliente.nombre }}
+                </li>
+              </ul>
+              <!-- Datos del cliente -->
+              <ng-container *ngIf="clienteSeleccionado">
+                <div class="field readonly">
+                  <label>Documento</label>
+                  <input type="text" [value]="clienteSeleccionado.cedula" readonly>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section *ngIf="step === 3">
+      <h3>Servicios cotizados</h3>
 
       <table>
         <thead>
@@ -53,7 +118,6 @@
             <th>Sub-total</th>
           </tr>
         </thead>
-
         <tbody>
           <tr>
             <td><input></td>
@@ -67,29 +131,36 @@
       </table>
 
       <button class="btn-add">+ Agregar ítem</button>
-    </div>
+    </section>
 
-    <!-- TOTALES -->
-    <div class="totales">
-      <div>
-        <p>Subtotal:</p>
-        <p>IVA 19%:</p>
-        <p>IPO 8%:</p>
-        <h3>Total:</h3>
+    <!-- STEP 4 -->
+    <section *ngIf="step === 4">
+      <h3>Resumen</h3>
+
+      <div class="totales">
+        <div>
+          <p>Subtotal</p>
+          <p>IVA 19%</p>
+          <p>IPO 8%</p>
+          <h3>Total</h3>
+        </div>
+        <div>
+          <p>$0</p>
+          <p>$0</p>
+          <p>$0</p>
+          <h3>$0</h3>
+        </div>
       </div>
 
-      <div>
-        <p>$0</p>
-        <p>$0</p>
-        <p>$0</p>
-        <h3>$0</h3>
-      </div>
-    </div>
+      <textarea placeholder="Observaciones comerciales"></textarea>
+    </section>
 
-    <!-- OBSERVACIONES -->
-    <div class="section">
-      <h4>Observaciones comerciales</h4>
-      <textarea rows="4"></textarea>
+    <!-- ACTIONS -->
+    <div class="wizard-actions">
+      <button (click)="prevStep()" [disabled]="step === 1">Atrás</button>
+      <button (click)="nextStep()">
+        {{ step === 4 ? 'Finalizar' : 'Siguiente' }}
+      </button>
     </div>
 
   </div>
